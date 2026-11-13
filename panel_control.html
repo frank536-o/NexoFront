@@ -3,86 +3,190 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nexo | Panel de Control</title>
+  <title>Nexo | Panel de Administración</title>
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 
-  <!-- Barra Superior del Panel -->
-  <header class="dash-header">
-    <div class="logo">Nexo Dashboard</div>
-    
-    <div class="user-panel-info">
-      <!-- Billetera -->
-      <div class="wallet-badge">
-        <span>Saldo: <strong id="userBalance">$0.00</strong></span>
-        <button id="btnRecargar" class="btn-small">+ Recargar</button>
-      </div>
-
-      <!-- Foto y Perfil -->
-      <div class="user-profile">
-        <img id="userAvatar" src="https://via.placeholder.com/40" alt="Foto Perfil" class="avatar">
-        <span id="userName">Cargando...</span>
-        <button id="btnLogout" class="btn-danger-small">Salir</button>
-      </div>
+  <header style="background:var(--bg-card); border-bottom:1px solid var(--border-color); padding:16px 6%; display:flex; justify-content:space-between; align-items:center;">
+    <div style="display:flex; align-items:center; gap:15px;">
+      <h2 style="font-weight:900;">Nexo<span style="color:var(--purple-neon);">.</span> <small style="font-size:13px; color:var(--purple-neon); font-weight:600;">ADMIN PANEL</small></h2>
+    </div>
+    <div style="display:flex; align-items:center; gap:15px;">
+      <span id="adminNombreLabel" style="color:var(--text-muted); font-size:14px;"></span>
+      <a href="index.html" class="btn-secondary" style="text-decoration:none; padding:7px 14px; font-size:13px;">Ver Sitio</a>
+      <button class="btn-danger" id="btnAdminLogout" style="padding:7px 14px; font-size:13px;">Cerrar Sesión</button>
     </div>
   </header>
 
-  <div class="dash-container">
-    <!-- Menú Lateral -->
-    <aside class="sidebar">
-      <ul>
-        <li class="active"><a href="#mis-servicios">Explorar Servicios</a></li>
-        <li id="menuCrearServicio" class="hidden"><a href="#publicar">+ Publicar Servicio</a></li>
-        <li><a href="#mis-reservas">Mis Reservas</a></li>
-        <li><a href="#editar-perfil">Editar Mi Perfil</a></li>
-      </ul>
-    </aside>
+  <main style="padding: 40px 6%;">
+    <!-- Métricas -->
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:20px; margin-bottom:40px;">
+      <div style="background:var(--bg-card); border:1px solid var(--border-color); padding:22px; border-radius:var(--radius);">
+        <small style="color:var(--text-muted);">Usuarios Registrados</small>
+        <h2 id="statUsuarios" style="font-size:2rem; color:var(--purple-neon); margin-top:5px;">0</h2>
+      </div>
+      <div style="background:var(--bg-card); border:1px solid var(--border-color); padding:22px; border-radius:var(--radius);">
+        <small style="color:var(--text-muted);">Servicios Activos</small>
+        <h2 id="statServicios" style="font-size:2rem; color:var(--accent-cyan); margin-top:5px;">0</h2>
+      </div>
+      <div style="background:var(--bg-card); border:1px solid var(--border-color); padding:22px; border-radius:var(--radius);">
+        <small style="color:var(--text-muted);">Reservas Totales</small>
+        <h2 id="statReservas" style="font-size:2rem; color:var(--accent-green); margin-top:5px;">0</h2>
+      </div>
+    </div>
 
-    <!-- Contenido Principal Dinámico -->
-    <main class="dash-content">
-      <!-- Vista de Servicios -->
-      <section id="secServicios">
-        <h2>Servicios Disponibles para Reservar</h2>
-        <div id="gridDashboardServicios" class="grid-servicios"></div>
-      </section>
+    <!-- Gestión de Categorías -->
+    <section style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius); padding:25px; margin-bottom:35px;">
+      <h3 style="margin-bottom:15px;">Gestión de Categorías de Servicios</h3>
+      
+      <form id="formNuevaCategoria" style="display:flex; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
+        <input type="text" id="inputNuevaCategoria" placeholder="Ej: Fotografía & Video, Clases Particulares..." required
+               style="flex:1; min-width:240px; padding:10px 14px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff; outline:none;">
+        <button type="submit" class="btn-primary">+ Crear Categoría</button>
+      </form>
 
-      <!-- Formulario para Prestador (Solo visible si el rol es PRESTADOR) -->
-      <section id="secPublicar" class="hidden">
-        <h2>Publicar Nuevo Servicio</h2>
-        <form id="formNuevoServicio" class="card-form">
-          <input type="text" id="servNombre" placeholder="Título del servicio" required>
-          <input type="number" id="servPrecio" placeholder="Precio ($)" required>
-          <select id="servCategoria" required>
-            <option value="Mecánica">Mecánica</option>
-            <option value="Desarrollo Web">Desarrollo Web</option>
-            <option value="Hogar">Servicios del Hogar</option>
-            <option value="Diseño">Diseño y Creatividad</option>
-          </select>
-          <textarea id="servDesc" placeholder="Descripción detallada del servicio..." required></textarea>
-          <label>Subir Imagen del Servicio:</label>
-          <input type="file" id="servFoto" accept="image/*">
-          <button type="submit" class="btn-primary">Guardar y Publicar</button>
-        </form>
-      </section>
+      <div id="listaAdminCategorias" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+    </section>
 
-      <!-- Editar Perfil -->
-      <section id="secPerfil" class="hidden">
-        <h2>Editar Datos Personales</h2>
-        <form id="formPerfil" class="card-form">
-          <label>Foto de Perfil:</label>
-          <input type="file" id="editAvatar" accept="image/*">
-          <input type="text" id="editName" placeholder="Nombre completo">
-          <input type="text" id="editPhone" placeholder="Teléfono / Celular">
-          <input type="text" id="editAddress" placeholder="Dirección de residencia">
-          <input type="password" id="editPassword" placeholder="Nueva Contraseña (opcional)">
-          <button type="submit" class="btn-primary">Actualizar Perfil</button>
-        </form>
-      </section>
-    </main>
-  </div>
+    <!-- Gestión de Usuarios -->
+    <section style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius); padding:25px; margin-bottom:35px; overflow-x:auto;">
+      <h3 style="margin-bottom:18px;">Gestión de Usuarios Registrados</h3>
+      <table style="width:100%; border-collapse:collapse; text-align:left; font-size:14px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border-color); color:var(--text-muted);">
+            <th style="padding:10px;">Doc ID</th>
+            <th style="padding:10px;">Usuario</th>
+            <th style="padding:10px;">Nombre Completo</th>
+            <th style="padding:10px;">Correo</th>
+            <th style="padding:10px;">Rol</th>
+            <th style="padding:10px;">Billetera</th>
+            <th style="padding:10px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaAdminUsuarios"></tbody>
+      </table>
+    </section>
 
-  <script type="module" src="js/dashboardApp.js"></script>
+    <!-- Moderación de Servicios -->
+    <section style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:var(--radius); padding:25px; overflow-x:auto;">
+      <h3 style="margin-bottom:18px;">Moderación de Servicios Publicados</h3>
+      <table style="width:100%; border-collapse:collapse; text-align:left; font-size:14px;">
+        <thead>
+          <tr style="border-bottom:1px solid var(--border-color); color:var(--text-muted);">
+            <th style="padding:10px;">ID</th>
+            <th style="padding:10px;">Servicio</th>
+            <th style="padding:10px;">Categoría</th>
+            <th style="padding:10px;">Prestador</th>
+            <th style="padding:10px;">Precio</th>
+            <th style="padding:10px;">Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="tablaAdminServicios"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script type="module">
+    import { NexoService } from './js/services/NexoService.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const nexoService = new NexoService();
+      const admin = nexoService.obtenerUsuarioSesion();
+
+      // Protección de ruta: solo ADMIN
+      if (!admin || admin.role !== 'ADMIN') {
+        alert('Acceso denegado. Esta sección es exclusiva para Administradores.');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      document.getElementById('adminNombreLabel').textContent = `Hola, ${admin.name} (@${admin.userName})`;
+
+      function cargarDatosAdmin() {
+        const usuarios = nexoService.obtenerUsuarios();
+        const servicios = nexoService.obtenerServicios();
+        const reservas = nexoService.obtenerReservas();
+        const categorias = nexoService.obtenerCategorias();
+
+        document.getElementById('statUsuarios').textContent = usuarios.length;
+        document.getElementById('statServicios').textContent = servicios.length;
+        document.getElementById('statReservas').textContent = reservas.length;
+
+        // Renderizar Categorías
+        document.getElementById('listaAdminCategorias').innerHTML = categorias.map(cat => `
+          <div style="background:#0f0919; border:1px solid var(--border-color); padding:8px 14px; border-radius:50px; display:flex; align-items:center; gap:10px;">
+            <span style="font-size:14px; font-weight:600;">${cat}</span>
+            <button onclick="window.adminBorrarCategoria('${cat}')" style="background:none; border:none; color:var(--accent-red); cursor:pointer; font-weight:bold; font-size:15px;" title="Eliminar">&times;</button>
+          </div>
+        `).join('');
+
+        // Tabla Usuarios
+        document.getElementById('tablaAdminUsuarios').innerHTML = usuarios.map(u => `
+          <tr style="border-bottom:1px solid var(--border-color);">
+            <td style="padding:10px;">${u.docType} ${u.id}</td>
+            <td style="padding:10px;">@${u.userName}</td>
+            <td style="padding:10px;">${u.name} ${u.lastName}</td>
+            <td style="padding:10px;">${u.email}</td>
+            <td style="padding:10px;"><span style="color:var(--purple-neon); font-weight:700;">${u.role}</span></td>
+            <td style="padding:10px; color:var(--accent-green);">$${Number(u.saldoBilletera).toLocaleString()}</td>
+            <td style="padding:10px;">
+              ${u.id !== admin.id ? `<button class="btn-danger" style="padding:4px 10px; font-size:12px;" onclick="window.adminBorrarUsuario('${u.id}')">Eliminar</button>` : '<small style="color:var(--text-muted);">Sesión actual</small>'}
+            </td>
+          </tr>
+        `).join('');
+
+        // Tabla Servicios
+        document.getElementById('tablaAdminServicios').innerHTML = servicios.map(s => `
+          <tr style="border-bottom:1px solid var(--border-color);">
+            <td style="padding:10px;">#${s.idServicio}</td>
+            <td style="padding:10px;">${s.nombreServicio}</td>
+            <td style="padding:10px;">${s.categoriaServicio}</td>
+            <td style="padding:10px;">${s.prestadorNombre}</td>
+            <td style="padding:10px; color:var(--accent-green);">$${Number(s.precioServicio).toLocaleString()}</td>
+            <td style="padding:10px;">
+              <button class="btn-danger" style="padding:4px 10px; font-size:12px;" onclick="window.adminBorrarServicio(${s.idServicio})">Dar de baja</button>
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      document.getElementById('formNuevaCategoria').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nombre = document.getElementById('inputNuevaCategoria').value;
+        const res = nexoService.agregarCategoria(nombre);
+        alert(res.mensaje);
+        if (res.ok) {
+          document.getElementById('inputNuevaCategoria').value = '';
+          cargarDatosAdmin();
+        }
+      });
+
+      window.adminBorrarCategoria = (nombre) => {
+        if (!confirm(`¿Eliminar la categoría "${nombre}"?`)) return;
+        nexoService.eliminarCategoria(nombre);
+        cargarDatosAdmin();
+      };
+
+      window.adminBorrarUsuario = (id) => {
+        if (!confirm('¿Eliminar este usuario del sistema?')) return;
+        nexoService.eliminarUsuario(id);
+        cargarDatosAdmin();
+      };
+
+      window.adminBorrarServicio = (idServicio) => {
+        if (!confirm('¿Eliminar este servicio del catálogo?')) return;
+        nexoService.eliminarServicio(idServicio);
+        cargarDatosAdmin();
+      };
+
+      document.getElementById('btnAdminLogout').addEventListener('click', () => {
+        nexoService.cerrarSesion();
+        window.location.href = 'index.html';
+      });
+
+      cargarDatosAdmin();
+    });
+  </script>
 </body>
 </html>

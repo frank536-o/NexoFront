@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo | Catálogo de Servicios</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+  <!-- Navbar con Categorías Dinámicas y Dropdown estilo Platzi -->
+  <header class="navbar">
+    <a href="index.html" class="logo" style="text-decoration:none;">Nexo<span>.</span></a>
+    <nav id="navCategorias"></nav>
+    <div class="nav-actions" id="navRightContainer" style="display:flex; gap:12px; align-items:center;"></div>
+  </header>
+
+  <main style="padding: 50px 8%; min-height: 75vh;">
+    <div style="margin-bottom: 35px;">
+      <span id="badgeFiltro" style="background:rgba(168,85,247,0.15); color:var(--purple-neon); padding:5px 14px; border-radius:20px; font-size:13px; font-weight:700;">CATÁLOGO NEXO</span>
+      <h1 id="tituloCatalogo" style="font-size: 2.3rem; margin-top: 10px;">Todos los Servicios Disponibles</h1>
+      <p id="subtituloCatalogo" style="color: var(--text-muted);">Selecciona un especialista y agenda tu servicio al instante.</p>
+    </div>
+
+    <div id="gridCatalogo" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 25px;"></div>
+  </main>
+
+  <!-- Modal Confirmar Reserva -->
+  <div id="modalConfirmarReserva" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" onclick="document.getElementById('modalConfirmarReserva').classList.add('hidden')">&times;</span>
+      <h2 style="margin-bottom:10px;">Agendar Servicio</h2>
+      <p id="resServTitulo" style="color:var(--purple-neon); font-weight:700; margin-bottom:5px;"></p>
+      <p id="resServPrecio" style="color:var(--accent-green); font-weight:700; margin-bottom:18px;"></p>
+
+      <form id="formAgendarReserva">
+        <div class="form-group">
+          <label>Selecciona la fecha para el servicio:</label>
+          <input type="date" id="fechaReservaInput" required>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;">Confirmar y Pagar con Billetera</button>
+      </form>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nexo Inc. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <script type="module">
+    import { NexoService } from './js/services/NexoService.js';
+    import { inicializarAutenticacionUI } from './js/authController.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const nexoService = new NexoService();
+      let servicioSeleccionado = null;
+
+      inicializarAutenticacionUI(() => renderCatalogo());
+
+      // Llenar menú superior de categorías dinámicamente
+      const navCat = document.getElementById('navCategorias');
+      const linksCategorias = nexoService.obtenerCategorias()
+        .map(cat => `<a href="catalogo.html?categoria=${encodeURIComponent(cat)}">${cat}</a>`)
+        .join('');
+      navCat.innerHTML = `<a href="index.html">← Volver al Inicio</a><a href="catalogo.html">Todos</a>${linksCategorias}`;
+
+      const params = new URLSearchParams(window.location.search);
+      const categoriaParam = params.get('categoria');
+      const busquedaParam = params.get('busqueda');
+
+      function renderCatalogo() {
+        let servicios = nexoService.obtenerServicios();
+
+        if (categoriaParam) {
+          document.getElementById('tituloCatalogo').textContent = `Prestadores en ${categoriaParam}`;
+          document.getElementById('badgeFiltro').textContent = categoriaParam.toUpperCase();
+          servicios = servicios.filter(s =>
+            s.categoriaServicio.toLowerCase().includes(categoriaParam.trim().toLowerCase())
+          );
+        } else if (busquedaParam) {
+          document.getElementById('tituloCatalogo').textContent = `Resultados para "${busquedaParam}"`;
+          servicios = servicios.filter(s =>
+            s.nombreServicio.toLowerCase().includes(busquedaParam.toLowerCase()) ||
+            s.descripcionServicio.toLowerCase().includes(busquedaParam.toLowerCase()) ||
+            s.categoriaServicio.toLowerCase().includes(busquedaParam.toLowerCase())
+          );
+        }
+
+        const subtitulo = document.getElementById('subtituloCatalogo');
+        const grid = document.getElementById('gridCatalogo');
+
+        if (servicios.length === 0) {
+          subtitulo.style.display = 'none';
+          const mensajeVacio = busquedaParam
+            ? `No encontramos servicios que coincidan con "${busquedaParam}". Intenta con otra palabra clave o explora todo el catálogo.`
+            : 'No hay prestadores disponibles en esta categoría todavía.';
+
+          grid.innerHTML = `
+            <div style="grid-column: 1 / -1; background: var(--bg-card); border: 1px solid var(--border-color); padding: 30px; border-radius: 14px; text-align: center;">
+              <p style="color: var(--text-muted); margin-bottom: 16px; font-size: 16px;">${mensajeVacio}</p>
+              <a href="catalogo.html" class="btn-primary" style="text-decoration: none; display: inline-block;">Ver todos los servicios</a>
+            </div>
+          `;
+          return;
+        }
+
+        subtitulo.style.display = 'block';
+        const usuarioActual = nexoService.obtenerUsuarioSesion();
+
+        grid.innerHTML = servicios.map(s => {
+          const esPropio = usuarioActual && String(usuarioActual.id) === String(s.prestadorId);
+          return `
+            <div style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:14px; overflow:hidden; display:flex; flex-direction:column; justify-content:space-between;">
+              <div>
+                <img src="${s.imagen}" alt="${s.nombreServicio}" style="width:100%; height:180px; object-fit:cover;">
+                <div style="padding:18px;">
+                  <span style="background:rgba(168,85,247,0.15); color:var(--purple-neon); padding:3px 10px; border-radius:6px; font-size:12px; font-weight:600;">${s.categoriaServicio}</span>
+                  <h3 style="margin:10px 0 6px; font-size:18px;">${s.nombreServicio}</h3>
+                  <p style="color:var(--text-muted); font-size:14px; margin-bottom:14px;">${s.descripcionServicio}</p>
+                </div>
+              </div>
+              <div style="padding:0 18px 18px;">
+                <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border-color); padding-top:12px; margin-bottom:12px;">
+                  <div>
+                    <small style="color:var(--text-muted); display:block;">Prestador</small>
+                    <strong style="font-size:14px;">${s.prestadorNombre} ⭐ ${s.calificacion}</strong>
+                  </div>
+                  <strong style="color:var(--accent-green); font-size:18px;">$${Number(s.precioServicio).toLocaleString()}</strong>
+                </div>
+                ${esPropio
+                  ? `<button class="btn-secondary" style="width:100%; opacity:0.65; cursor:default;" disabled>Tu servicio publicado</button>`
+                  : `<button class="btn-primary" style="width:100%;" onclick="window.iniciarReserva(${s.idServicio})">Reservar Servicio</button>`
+                }
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+
+      window.iniciarReserva = (idServicio) => {
+        const usuario = nexoService.obtenerUsuarioSesion();
+        if (!usuario) {
+          alert('Inicia sesión o regístrate para poder agendar este servicio.');
+          document.getElementById('btnOpenLogin').click();
+          return;
+        }
+
+        servicioSeleccionado = nexoService.obtenerServicios().find(s => s.idServicio === idServicio);
+        if (!servicioSeleccionado) return;
+
+        if (String(usuario.id) === String(servicioSeleccionado.prestadorId)) {
+          alert('No puedes reservar un servicio publicado por ti mismo.');
+          return;
+        }
+
+        document.getElementById('resServTitulo').textContent = `${servicioSeleccionado.nombreServicio} (${servicioSeleccionado.prestadorNombre})`;
+        document.getElementById('resServPrecio').textContent = `Valor a descontar: $${Number(servicioSeleccionado.precioServicio).toLocaleString()}`;
+        document.getElementById('modalConfirmarReserva').classList.remove('hidden');
+      };
+
+      document.getElementById('formAgendarReserva').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const usuario = nexoService.obtenerUsuarioSesion();
+        const fecha = document.getElementById('fechaReservaInput').value;
+
+        const res = nexoService.crearReserva(usuario.id, servicioSeleccionado, fecha);
+        alert(res.mensaje);
+
+        if (res.ok) {
+          document.getElementById('modalConfirmarReserva').classList.add('hidden');
+          inicializarAutenticacionUI();
+        }
+      });
+
+      renderCatalogo();
+    });
+  </script>
+</body>
+</html>

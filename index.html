@@ -11,28 +11,28 @@
 
   <!-- Navbar -->
   <header class="navbar">
-    <div class="logo">Nexo<span>.</span></div>
+    <a href="index.html" class="logo" style="text-decoration:none; display:flex; align-items:center; gap:10px;">
+      <!-- Cuando tengas tu logo, reemplaza esto por: <img src="assets/logo.png" alt="Nexo" style="height:38px;"> -->
+      Nexo<span>.</span>
+    </a>
     <nav>
       <a href="#inicio">Inicio</a>
-      <a href="#categorias">Categorías</a>
-      <a href="#beneficios">Ventajas</a>
+      <a href="catalogo.html">Categorías</a>
+      <a href="#nosotros">Nosotros</a>
       <a href="#faq">Preguntas</a>
       <a href="#contacto">Ayuda</a>
     </nav>
-    <div class="nav-actions">
-      <button class="btn-secondary" id="btnOpenLogin">Iniciar Sesión</button>
-      <button class="btn-primary" id="btnOpenRegister">Únete ahora</button>
-    </div>
+    <div class="nav-actions" id="navRightContainer" style="display:flex; gap:12px; align-items:center;"></div>
   </header>
 
-  <!-- Hero tipo Fiverr -->
+  <!-- Hero tipo Fiverr Dark -->
   <section id="inicio" class="hero-fiverr">
     <h1>Encuentra el servicio <span>ideal de inmediato</span></h1>
     
-    <div class="search-box">
-      <input type="text" placeholder="¿Qué servicio buscas? Ej: Mantenimiento moto, Web dev...">
-      <button>Buscar</button>
-    </div>
+    <form class="search-box" id="heroSearchForm">
+      <input type="text" id="heroSearchInput" placeholder="¿Qué servicio buscas? Ej: Mantenimiento moto, Web dev...">
+      <button type="submit">Buscar</button>
+    </form>
 
     <div class="hero-features">
       <span>✓ Pagos seguros vía Billetera Nexo</span>
@@ -40,38 +40,37 @@
       <span>✓ Soporte en todo momento</span>
     </div>
 
-    <!-- Categorías Rápidas -->
-    <div id="categorias" class="categories-grid">
-      <div class="category-card">
-        <h3>Mecánica & Motos</h3>
-      </div>
-      <div class="category-card">
-        <h3>Desarrollo Web</h3>
-      </div>
-      <div class="category-card">
-        <h3>Diseño & UI</h3>
-      </div>
-      <div class="category-card">
-        <h3>Servicios del Hogar</h3>
-      </div>
-    </div>
+    <!-- Categorías Rápidas (Se dibujan automáticamente desde JS) -->
+    <div id="categorias" class="categories-grid"></div>
   </section>
 
-  <!-- Ventajas (Haz que todo suceda) -->
-  <section id="beneficios" style="padding: 70px 8%;">
-    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px;">Haz que todo suceda con Nexo</h2>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center;">
-      <div style="background: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color);">
-        <h4 style="margin-bottom: 10px; color: var(--purple-neon);">Catálogo Variado</h4>
-        <p style="color: var(--text-muted);">Encuentra prestadores capacitados en múltiples áreas locales.</p>
+  <!-- Quiénes Somos, Misión y Visión -->
+  <section id="nosotros" style="padding: 70px 8%;">
+    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 15px;">Conoce <span style="color:var(--purple-neon);">Nexo</span></h2>
+    <p style="text-align: center; color: var(--text-muted); max-width: 750px; margin: 0 auto 45px;">
+      Tecnología limpia y talento local conectados en un solo ecosistema.
+    </p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+      <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-color); border-top: 3px solid var(--purple-neon);">
+        <h3 style="margin-bottom: 12px; color: #fff;">Quiénes Somos</h3>
+        <p style="color: var(--text-muted); font-size: 15px;">
+          En Nexo eliminamos las vueltas innecesarias para conectar a quienes saben hacer el trabajo con quienes lo necesitan ya. Somos una plataforma digital diseñada para centralizar servicios locales y técnicos en un solo entorno ágil, transparente y seguro, donde cada talento tiene visibilidad real y cada cliente encuentra soluciones verificadas sin perder tiempo.
+        </p>
       </div>
-      <div style="background: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color);">
-        <h4 style="margin-bottom: 10px; color: var(--purple-neon);">Billetera Inteligente</h4>
-        <p style="color: var(--text-muted);">Recarga y gestiona tus pagos sin comisiones ocultas.</p>
+
+      <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-color); border-top: 3px solid var(--accent-cyan);">
+        <h3 style="margin-bottom: 12px; color: #fff;">Misión</h3>
+        <p style="color: var(--text-muted); font-size: 15px;">
+          Conectar de forma inmediata, segura y transparente a clientes con prestadores de servicios calificados, impulsando la economía independiente mediante herramientas digitales intuitivas y pagos protegidos.
+        </p>
       </div>
-      <div style="background: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color);">
-        <h4 style="margin-bottom: 10px; color: var(--purple-neon);">Calificaciones Reales</h4>
-        <p style="color: var(--text-muted);">Elige basándote en la reputación directa de otros clientes.</p>
+
+      <div style="background: var(--bg-card); padding: 30px; border-radius: var(--radius); border: 1px solid var(--border-color); border-top: 3px solid var(--purple-neon);">
+        <h3 style="margin-bottom: 12px; color: #fff;">Visión</h3>
+        <p style="color: var(--text-muted); font-size: 15px;">
+          Liderar la evolución digital del mercado de servicios independientes, creando un ecosistema inteligente donde cualquier habilidad pueda monetizarse con respaldo y confianza.
+        </p>
       </div>
     </div>
   </section>
@@ -83,15 +82,15 @@
     <div class="faq-section">
       <div class="faq-item">
         <div class="faq-question">¿Cómo me registro como prestador o cliente? <span>+</span></div>
-        <div class="faq-answer">Al hacer clic en "Únete ahora", eliges tu rol. Si seleccionas Prestador, podrás publicar tus servicios con fotos y tarifas inmediatamente.</div>
+        <div class="faq-answer">Al hacer clic en "Únete ahora", completas tus datos y eliges tu rol. Si seleccionas Prestador, podrás publicar tus servicios inmediatamente desde tu menú superior.</div>
       </div>
       <div class="faq-item">
         <div class="faq-question">¿Cómo funciona el pago con Billetera Nexo? <span>+</span></div>
-        <div class="faq-answer">Recargas tu saldo dentro de tu panel de control y al solicitar un servicio se descuenta de tu saldo virtual.</div>
+        <div class="faq-answer">Recargas saldo desde tu menú de perfil y al reservar cualquier servicio en el catálogo el valor se descuenta automáticamente de tu billetera.</div>
       </div>
       <div class="faq-item">
         <div class="faq-question">¿En qué se diferencia Nexo de otras plataformas? <span>+</span></div>
-        <div class="faq-answer">Nos enfocamos en servicios locales rápidos de alto impacto con una experiencia oscura, directa y sin intermediarios complejos.</div>
+        <div class="faq-answer">Nos enfocamos en servicios locales rápidos de alto impacto con una interfaz oscura, directa, billetera integrada y calificaciones verificadas.</div>
       </div>
     </div>
   </section>
@@ -99,8 +98,8 @@
   <!-- Banner CTA Cierre -->
   <div class="cta-banner">
     <h2 style="font-size: 2rem; margin-bottom: 15px;">Expertos con experiencia en todo tipo de proyectos</h2>
-    <p style="color: var(--text-muted); margin-bottom: 25px;">Únete hoy a la comunidad de Nexo y empieza a ofrecer o contratar servicios.</p>
-    <button class="btn-primary" onclick="document.getElementById('btnOpenRegister').click()">Únete ahora</button>
+    <p style="color: var(--text-muted); margin-bottom: 25px;">Explora el catálogo completo o únete hoy a la comunidad de Nexo.</p>
+    <button class="btn-primary" onclick="window.location.href='catalogo.html'">Explorar Catálogo Completo</button>
   </div>
 
   <!-- Footer Completo -->
@@ -119,7 +118,8 @@
       <div class="footer-col">
         <h4>Enlaces Rápidos</h4>
         <a href="#inicio">Inicio</a>
-        <a href="#categorias">Categorías</a>
+        <a href="catalogo.html">Catálogo de Servicios</a>
+        <a href="#nosotros">Quiénes Somos</a>
         <a href="#faq">Preguntas Frecuentes</a>
       </div>
     </div>
@@ -128,49 +128,35 @@
     </div>
   </footer>
 
-  <!-- Modal Auth -->
-  <div id="modalAuth" class="modal hidden">
-    <div class="modal-content">
-      <span class="close-modal" id="closeAuth">&times;</span>
-      <h2 id="modalTitle" style="margin-bottom: 20px;">Ingresar a Nexo</h2>
-      
-      <form id="formAuth">
-        <div style="margin-bottom: 15px;">
-          <label style="display:block; margin-bottom:5px;">Correo Electrónico:</label>
-          <input type="email" id="authEmail" required style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
+  <script type="module">
+    import { inicializarAutenticacionUI } from './js/authController.js';
+    import { NexoService } from './js/services/NexoService.js';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      inicializarAutenticacionUI();
+      const nexoService = new NexoService();
+
+      // Dibujar tarjetas de categorías dinámicamente
+      const gridCategorias = document.getElementById('categorias');
+      gridCategorias.innerHTML = nexoService.obtenerCategorias().map(cat => `
+        <div class="category-card" onclick="window.location.href='catalogo.html?categoria=${encodeURIComponent(cat)}'">
+          <h3 style="color:var(--purple-neon); margin-bottom:6px;">${cat}</h3>
+          <small style="color:var(--text-muted);">Ver especialistas →</small>
         </div>
-        <div style="margin-bottom: 15px;">
-          <label style="display:block; margin-bottom:5px;">Contraseña:</label>
-          <input type="password" id="authPassword" required style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
-        </div>
+      `).join('');
 
-        <div id="registerFields" class="hidden">
-          <div style="margin-bottom: 15px;">
-            <label style="display:block; margin-bottom:5px;">Nombre Completo:</label>
-            <input type="text" id="regName" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
-          </div>
-          <div style="margin-bottom: 15px;">
-            <label style="display:block; margin-bottom:5px;">Tipo de Rol:</label>
-            <select id="regRole" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
-              <option value="CLIENTE">Cliente</option>
-              <option value="PRESTADOR">Prestador de Servicios</option>
-            </select>
-          </div>
-        </div>
+      // Buscador del Hero hacia catalogo.html
+      document.getElementById('heroSearchForm').addEventListener('submit', (e) => {
+        e.preventDefault();
+        const q = document.getElementById('heroSearchInput').value.trim();
+        window.location.href = q ? `catalogo.html?busqueda=${encodeURIComponent(q)}` : 'catalogo.html';
+      });
 
-        <button type="submit" class="btn-primary" id="btnAuthSubmit" style="width:100%; margin-top:10px;">Ingresar</button>
-      </form>
-    </div>
-  </div>
-
-  <script type="module" src="js/app.js"></script>
-
-  <!-- JS Acordeón FAQ -->
-  <script>
-    document.querySelectorAll('.faq-question').forEach(q => {
-      q.addEventListener('click', () => {
-        const item = q.parentElement;
-        item.classList.toggle('active');
+      // Acordeón FAQ
+      document.querySelectorAll('.faq-question').forEach(q => {
+        q.addEventListener('click', () => {
+          q.parentElement.classList.toggle('active');
+        });
       });
     });
   </script>

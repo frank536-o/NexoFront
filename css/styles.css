@@ -1,11 +1,12 @@
 :root {
-  /* Tema Dark & Neon */
   --bg-dark: #0b0712;
   --bg-card: #150f21;
   --bg-card-hover: #1e162e;
   --purple-neon: #a855f7;
   --purple-glow: rgba(168, 85, 247, 0.4);
   --accent-cyan: #06b6d4;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
   --text-main: #f3f4f6;
   --text-muted: #9ca3af;
   --border-color: #2e2440;
@@ -28,33 +29,38 @@ body {
 
 .hidden { display: none !important; }
 
-/* Botones Neon */
+/* Botones */
 .btn-primary {
   background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);
   color: #fff;
   border: none;
-  padding: 12px 24px;
+  padding: 11px 22px;
   border-radius: var(--radius);
   font-weight: 700;
   cursor: pointer;
   box-shadow: 0 4px 15px var(--purple-glow);
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
-.btn-primary:hover {
+.btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 25px rgba(168, 85, 247, 0.6);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .btn-secondary {
   background: transparent;
   color: var(--purple-neon);
   border: 2px solid var(--purple-neon);
-  padding: 10px 22px;
+  padding: 9px 20px;
   border-radius: var(--radius);
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .btn-secondary:hover {
@@ -63,7 +69,181 @@ body {
   box-shadow: 0 0 15px var(--purple-glow);
 }
 
-/* Modales Dark */
+.btn-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: var(--accent-red);
+  border: 1px solid var(--accent-red);
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: var(--accent-red);
+  color: #fff;
+}
+
+/* Formularios Oscuros */
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: #0f0919;
+  color: #fff;
+  font-size: 14px;
+  outline: none;
+  transition: border 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: var(--purple-neon);
+}
+
+.form-group input:disabled,
+.form-group select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  background: #09060f;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Cápsula y Dropdown de Usuario estilo Platzi */
+.user-menu-wrapper {
+  position: relative;
+}
+
+.user-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 6px 14px 6px 8px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.user-pill:hover {
+  border-color: var(--purple-neon);
+  box-shadow: var(--shadow-neon);
+}
+
+.user-pill img {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--purple-neon);
+}
+
+.user-pill-balance {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--accent-green);
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 54px;
+  right: 0;
+  width: 280px;
+  background: #181226;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7), var(--shadow-neon);
+  z-index: 999;
+}
+
+.dropdown-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.dropdown-header h4 {
+  font-size: 16px;
+  color: #fff;
+}
+
+.dropdown-header span {
+  font-size: 12px;
+  color: var(--purple-neon);
+  font-weight: 600;
+}
+
+.dropdown-wallet-box {
+  background: #0f0919;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdown-list {
+  list-style: none;
+}
+
+.dropdown-list li {
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--text-main);
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-list li:hover {
+  background: rgba(168, 85, 247, 0.15);
+  color: var(--purple-neon);
+}
+
+.dropdown-list li.logout-item {
+  margin-top: 8px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+  color: var(--accent-red);
+}
+
+.dropdown-list li.logout-item:hover {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+/* Modales */
 .modal {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
@@ -71,19 +251,55 @@ body {
   backdrop-filter: blur(8px);
   display: flex; align-items: center; justify-content: center;
   z-index: 1000;
+  padding: 15px;
 }
 
 .modal-content {
   background: var(--bg-card);
   border: 1px solid var(--border-color);
-  padding: 35px;
+  padding: 28px;
   border-radius: 16px;
-  width: 90%; max-width: 450px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
   position: relative;
   box-shadow: var(--shadow-neon);
 }
 
 .close-modal {
   position: absolute; top: 15px; right: 20px;
-  font-size: 24px; cursor: pointer; color: var(--text-muted);
+  font-size: 26px; cursor: pointer; color: var(--text-muted);
+}
+
+.close-modal:hover { color: #fff; }
+/* Scrollbar personalizado Dark & Neon */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0712;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2e2440;
+  border-radius: 10px;
+  border: 2px solid #0b0712;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--purple-neon);
+}
+
+/* Soporte para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2e2440 #0b0712;
+}
+
+input[type="date"] {
+  color-scheme: dark;
 }
