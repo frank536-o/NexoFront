@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo | Conecta con Servicios Profesionales</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/landing.css">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">Nexo<span>.</span></div>
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#beneficios">Ventajas</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#contacto">Ayuda</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn-secondary" id="btnOpenLogin">Iniciar Sesión</button>
+      <button class="btn-primary" id="btnOpenRegister">Únete ahora</button>
+    </div>
+  </header>
+
+  <!-- Hero tipo Fiverr -->
+  <section id="inicio" class="hero-fiverr">
+    <h1>Encuentra el servicio <span>ideal de inmediato</span></h1>
+    
+    <div class="search-box">
+      <input type="text" placeholder="¿Qué servicio buscas? Ej: Mantenimiento moto, Web dev...">
+      <button>Buscar</button>
+    </div>
+
+    <div class="hero-features">
+      <span>✓ Pagos seguros vía Billetera Nexo</span>
+      <span>✓ Prestadores verificados</span>
+      <span>✓ Soporte en todo momento</span>
+    </div>
+
+    <!-- Categorías Rápidas -->
+    <div id="categorias" class="categories-grid">
+      <div class="category-card">
+        <h3>Mecánica & Motos</h3>
+      </div>
+      <div class="category-card">
+        <h3>Desarrollo Web</h3>
+      </div>
+      <div class="category-card">
+        <h3>Diseño & UI</h3>
+      </div>
+      <div class="category-card">
+        <h3>Servicios del Hogar</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ventajas (Haz que todo suceda) -->
+  <section id="beneficios" style="padding: 70px 8%;">
+    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px;">Haz que todo suceda con Nexo</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: center;">
+      <div style="background: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+        <h4 style="margin-bottom: 10px; color: var(--purple-neon);">Catálogo Variado</h4>
+        <p style="color: var(--text-muted);">Encuentra prestadores capacitados en múltiples áreas locales.</p>
+      </div>
+      <div style="background: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+        <h4 style="margin-bottom: 10px; color: var(--purple-neon);">Billetera Inteligente</h4>
+        <p style="color: var(--text-muted);">Recarga y gestiona tus pagos sin comisiones ocultas.</p>
+      </div>
+      <div style="background: var(--bg-card); padding: 25px; border-radius: var(--radius); border: 1px solid var(--border-color);">
+        <h4 style="margin-bottom: 10px; color: var(--purple-neon);">Calificaciones Reales</h4>
+        <p style="color: var(--text-muted);">Elige basándote en la reputación directa de otros clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas Frecuentes (FAQ) -->
+  <section id="faq" style="padding: 60px 8%;">
+    <h2 style="text-align: center; font-size: 2.2rem; margin-bottom: 40px;">Preguntas Frecuentes</h2>
+    
+    <div class="faq-section">
+      <div class="faq-item">
+        <div class="faq-question">¿Cómo me registro como prestador o cliente? <span>+</span></div>
+        <div class="faq-answer">Al hacer clic en "Únete ahora", eliges tu rol. Si seleccionas Prestador, podrás publicar tus servicios con fotos y tarifas inmediatamente.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿Cómo funciona el pago con Billetera Nexo? <span>+</span></div>
+        <div class="faq-answer">Recargas tu saldo dentro de tu panel de control y al solicitar un servicio se descuenta de tu saldo virtual.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">¿En qué se diferencia Nexo de otras plataformas? <span>+</span></div>
+        <div class="faq-answer">Nos enfocamos en servicios locales rápidos de alto impacto con una experiencia oscura, directa y sin intermediarios complejos.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Banner CTA Cierre -->
+  <div class="cta-banner">
+    <h2 style="font-size: 2rem; margin-bottom: 15px;">Expertos con experiencia en todo tipo de proyectos</h2>
+    <p style="color: var(--text-muted); margin-bottom: 25px;">Únete hoy a la comunidad de Nexo y empieza a ofrecer o contratar servicios.</p>
+    <button class="btn-primary" onclick="document.getElementById('btnOpenRegister').click()">Únete ahora</button>
+  </div>
+
+  <!-- Footer Completo -->
+  <footer id="contacto" class="footer">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Nexo.</h4>
+        <p>Conectando el talento local con necesidades reales.</p>
+      </div>
+      <div class="footer-col">
+        <h4>¿Necesitas Ayuda?</h4>
+        <p>Email: soporte@nexoapp.com</p>
+        <p>Teléfono: +57 (604) 444-8899</p>
+        <p>Ubicación: Itagüí, Antioquia</p>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces Rápidos</h4>
+        <a href="#inicio">Inicio</a>
+        <a href="#categorias">Categorías</a>
+        <a href="#faq">Preguntas Frecuentes</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Nexo Inc. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+  <!-- Modal Auth -->
+  <div id="modalAuth" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal" id="closeAuth">&times;</span>
+      <h2 id="modalTitle" style="margin-bottom: 20px;">Ingresar a Nexo</h2>
+      
+      <form id="formAuth">
+        <div style="margin-bottom: 15px;">
+          <label style="display:block; margin-bottom:5px;">Correo Electrónico:</label>
+          <input type="email" id="authEmail" required style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
+        </div>
+        <div style="margin-bottom: 15px;">
+          <label style="display:block; margin-bottom:5px;">Contraseña:</label>
+          <input type="password" id="authPassword" required style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
+        </div>
+
+        <div id="registerFields" class="hidden">
+          <div style="margin-bottom: 15px;">
+            <label style="display:block; margin-bottom:5px;">Nombre Completo:</label>
+            <input type="text" id="regName" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
+          </div>
+          <div style="margin-bottom: 15px;">
+            <label style="display:block; margin-bottom:5px;">Tipo de Rol:</label>
+            <select id="regRole" style="width:100%; padding:10px; border-radius:8px; border:1px solid var(--border-color); background:#0f0919; color:#fff;">
+              <option value="CLIENTE">Cliente</option>
+              <option value="PRESTADOR">Prestador de Servicios</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="btnAuthSubmit" style="width:100%; margin-top:10px;">Ingresar</button>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+
+  <!-- JS Acordeón FAQ -->
+  <script>
+    document.querySelectorAll('.faq-question').forEach(q => {
+      q.addEventListener('click', () => {
+        const item = q.parentElement;
+        item.classList.toggle('active');
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+/* Navbar */
+.navbar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 8%;
+  background: rgba(11, 7, 18, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky; top: 0; z-index: 100;
+}
+
+.navbar .logo {
+  font-size: 28px; font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.5px;
+}
+.navbar .logo span { color: var(--purple-neon); }
+
+.navbar nav a {
+  margin: 0 18px; text-decoration: none;
+  color: var(--text-muted); font-weight: 500;
+  transition: 0.3s;
+}
+.navbar nav a:hover { color: var(--purple-neon); }
+
+/* Hero Section (Basado en Fiverr) */
+.hero-fiverr {
+  background: radial-gradient(circle at top, #23123b 0%, var(--bg-dark) 70%);
+  padding: 90px 8% 60px;
+  text-align: center;
+}
+
+.hero-fiverr h1 {
+  font-size: 3rem; margin-bottom: 25px; font-weight: 800;
+}
+.hero-fiverr h1 span {
+  color: var(--purple-neon);
+  text-shadow: 0 0 15px var(--purple-glow);
+}
+
+.search-box {
+  max-width: 650px; margin: 0 auto 35px;
+  display: flex; background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 50px; padding: 6px 8px 6px 20px;
+  box-shadow: var(--shadow-neon);
+}
+
+.search-box input {
+  flex: 1; background: transparent; border: none;
+  outline: none; color: #fff; font-size: 16px;
+}
+
+.search-box button {
+  background: var(--purple-neon); border: none;
+  color: #fff; padding: 12px 25px; border-radius: 40px;
+  font-weight: 700; cursor: pointer; transition: 0.3s;
+}
+.search-box button:hover { background: #9333ea; }
+
+.hero-features {
+  display: flex; justify-content: center; gap: 30px;
+  color: var(--text-muted); font-size: 14px; flex-wrap: wrap;
+}
+
+/* Categorías populares (Cards tipo cápsula) */
+.categories-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 18px; margin-top: 40px;
+}
+
+.category-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  padding: 25px 15px; border-radius: var(--radius);
+  text-align: center; cursor: pointer; transition: 0.3s;
+}
+
+.category-card:hover {
+  border-color: var(--purple-neon);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-neon);
+}
+
+.category-card i {
+  font-size: 30px; color: var(--purple-neon); margin-bottom: 12px;
+}
+
+/* Sección FAQ Accordeón */
+.faq-section {
+  max-width: 800px; margin: 0 auto;
+}
+
+.faq-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius); margin-bottom: 15px; overflow: hidden;
+}
+
+.faq-question {
+  padding: 20px; font-weight: 700; cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.faq-answer {
+  padding: 0 20px 20px; color: var(--text-muted); font-size: 15px; display: none;
+}
+
+.faq-item.active .faq-answer { display: block; }
+.faq-item.active .faq-question { color: var(--purple-neon); }
+
+/* Banner de cierre y Footer */
+.cta-banner {
+  background: linear-gradient(135deg, #2e1065 0%, #1e1b4b 100%);
+  border: 1px solid var(--purple-neon);
+  border-radius: 20px; padding: 50px 30px;
+  text-align: center; margin: 60px 8%;
+  box-shadow: var(--shadow-neon);
+}
+
+.footer {
+  background: #06040a; border-top: 1px solid var(--border-color);
+  padding: 50px 8% 20px; color: var(--text-muted);
+}
+
+.footer-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px; margin-bottom: 40px;
+}
+
+.footer-col h4 { color: #fff; margin-bottom: 18px; }
+.footer-col p, .footer-col a { color: var(--text-muted); text-decoration: none; display: block; margin-bottom: 8px; }
+.footer-col a:hover { color: var(--purple-neon); }
+
+.footer-bottom {
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px; text-align: center; font-size: 14px;
+}

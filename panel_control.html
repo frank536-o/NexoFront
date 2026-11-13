@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nexo | Panel de Control</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+
+  <!-- Barra Superior del Panel -->
+  <header class="dash-header">
+    <div class="logo">Nexo Dashboard</div>
+    
+    <div class="user-panel-info">
+      <!-- Billetera -->
+      <div class="wallet-badge">
+        <span>Saldo: <strong id="userBalance">$0.00</strong></span>
+        <button id="btnRecargar" class="btn-small">+ Recargar</button>
+      </div>
+
+      <!-- Foto y Perfil -->
+      <div class="user-profile">
+        <img id="userAvatar" src="https://via.placeholder.com/40" alt="Foto Perfil" class="avatar">
+        <span id="userName">Cargando...</span>
+        <button id="btnLogout" class="btn-danger-small">Salir</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="dash-container">
+    <!-- Menú Lateral -->
+    <aside class="sidebar">
+      <ul>
+        <li class="active"><a href="#mis-servicios">Explorar Servicios</a></li>
+        <li id="menuCrearServicio" class="hidden"><a href="#publicar">+ Publicar Servicio</a></li>
+        <li><a href="#mis-reservas">Mis Reservas</a></li>
+        <li><a href="#editar-perfil">Editar Mi Perfil</a></li>
+      </ul>
+    </aside>
+
+    <!-- Contenido Principal Dinámico -->
+    <main class="dash-content">
+      <!-- Vista de Servicios -->
+      <section id="secServicios">
+        <h2>Servicios Disponibles para Reservar</h2>
+        <div id="gridDashboardServicios" class="grid-servicios"></div>
+      </section>
+
+      <!-- Formulario para Prestador (Solo visible si el rol es PRESTADOR) -->
+      <section id="secPublicar" class="hidden">
+        <h2>Publicar Nuevo Servicio</h2>
+        <form id="formNuevoServicio" class="card-form">
+          <input type="text" id="servNombre" placeholder="Título del servicio" required>
+          <input type="number" id="servPrecio" placeholder="Precio ($)" required>
+          <select id="servCategoria" required>
+            <option value="Mecánica">Mecánica</option>
+            <option value="Desarrollo Web">Desarrollo Web</option>
+            <option value="Hogar">Servicios del Hogar</option>
+            <option value="Diseño">Diseño y Creatividad</option>
+          </select>
+          <textarea id="servDesc" placeholder="Descripción detallada del servicio..." required></textarea>
+          <label>Subir Imagen del Servicio:</label>
+          <input type="file" id="servFoto" accept="image/*">
+          <button type="submit" class="btn-primary">Guardar y Publicar</button>
+        </form>
+      </section>
+
+      <!-- Editar Perfil -->
+      <section id="secPerfil" class="hidden">
+        <h2>Editar Datos Personales</h2>
+        <form id="formPerfil" class="card-form">
+          <label>Foto de Perfil:</label>
+          <input type="file" id="editAvatar" accept="image/*">
+          <input type="text" id="editName" placeholder="Nombre completo">
+          <input type="text" id="editPhone" placeholder="Teléfono / Celular">
+          <input type="text" id="editAddress" placeholder="Dirección de residencia">
+          <input type="password" id="editPassword" placeholder="Nueva Contraseña (opcional)">
+          <button type="submit" class="btn-primary">Actualizar Perfil</button>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <script type="module" src="js/dashboardApp.js"></script>
+</body>
+</html>
